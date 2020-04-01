@@ -13,7 +13,7 @@ namespace EsportsClubBot
     [Group("election")]
     public class ElectionModule : ModuleBase<SocketCommandContext>
     {
-        // $election distro Member 04APR2020 2359 https://forms.google.com/... true
+        // $election distro Member 04APR2020 23:59 https://forms.google.com/... true
         [Command("distro")]
         [RequireOwner] // Requires that the President must call an election in this manner.
         [Summary("Sends election information to all users in a specified role.")]
@@ -67,8 +67,9 @@ namespace EsportsClubBot
             }
         }
 
+        // $election distro Member 04APR2020 23:59 https://forms.google.com/...
         [Command("distro")]
-        [RequireOwner]
+        [RequireOwner] // Requires that the President call an election in this manner.
         [Summary("Sends election information to all users in a specified role.")]
         public async Task DistroAsync([Summary("The specified role to send to.")] string role,
             [Summary("The end date of the vote, formatted as DDMMYYYY.")] string date,
