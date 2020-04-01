@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EsportsClubBot": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DiscordToken": "Njk0NDY3ODI0OTQwMzUxNDk4.XoMD0w.QJ6Gp1O1GKRD2vY0eTjrNh9Wpe8"
+      }
+    }
+  }
+}
