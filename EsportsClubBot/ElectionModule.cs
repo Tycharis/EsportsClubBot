@@ -55,15 +55,17 @@ namespace EsportsClubBot
 
                 await user.SendMessageAsync(messageBuilder.ToString());
 
-                voterIds.Sort();
+                Console.WriteLine($"Sending message to {user.Username}#{user.DiscriminatorValue}");
+            }
+            
+            voterIds.Sort();
 
-                string list = string.Join(", \n", voterIds);
-                List<string> messages = Paginate(list);
+            string list = string.Join("\n", voterIds);
+            List<string> messages = Paginate(list);
 
-                foreach (string message in messages)
-                {
-                    await Context.Channel.SendMessageAsync(message);
-                }
+            foreach (string message in messages)
+            {
+                await Context.Channel.SendMessageAsync(message);
             }
         }
 

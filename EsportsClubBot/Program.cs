@@ -29,7 +29,8 @@ namespace EsportsClubBot
 
             CommandServiceConfig _commandConfig = new CommandServiceConfig
             {
-                SeparatorChar = ' '
+                SeparatorChar = ' ',
+                DefaultRunMode = RunMode.Async
             };
 
             CommandService service = new CommandService(_commandConfig);
