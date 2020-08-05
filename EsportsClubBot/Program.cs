@@ -7,33 +7,34 @@ using Discord.WebSocket;
 
 namespace EsportsClubBot
 {
-    class Program
+    internal class Program
     {
         private DiscordSocketClient _client;
 
+        // ReSharper disable once ArrangeTypeMemberModifiers
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()
         {
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(OnSigInt);
+            Console.CancelKeyPress += OnSigInt;
 
-            DiscordSocketConfig _config = new DiscordSocketConfig
+            DiscordSocketConfig config = new DiscordSocketConfig
             {
                 MessageCacheSize = 100,
                 ExclusiveBulkDelete = true
             };
 
-            _client = new DiscordSocketClient(_config);
+            _client = new DiscordSocketClient(config);
 
             _client.Log += Log;
 
-            CommandServiceConfig _commandConfig = new CommandServiceConfig
+            CommandServiceConfig commandConfig = new CommandServiceConfig
             {
                 SeparatorChar = ' ',
                 DefaultRunMode = RunMode.Async
             };
 
-            CommandService service = new CommandService(_commandConfig);
+            CommandService service = new CommandService(commandConfig);
             CommandHandler handler = new CommandHandler(_client, service);
 
             await handler.InstallCommandsAsync();
@@ -52,13 +53,12 @@ namespace EsportsClubBot
 
         protected async void OnSigInt(object sender, ConsoleCancelEventArgs args)
         {
-            await _client.StopAsync();
             Console.WriteLine("Bot shutting down.");
-
-            return;
+            await _client.StopAsync();
+            Console.WriteLine("Bot shut down.");
         }
 
-        private Task Log(LogMessage message)
+        private static Task Log(LogMessage message)
         {
             Console.WriteLine(message.ToString());
             return Task.CompletedTask;
